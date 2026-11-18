@@ -7,7 +7,7 @@ published: false
 ---
 
 > この記事は 2026/11/19 のLT勉強会で発表したスライド資料の記事版です。
-> スライド版: (GitHub Pages公開後にURLを追記)
+> スライド版: https://mori-tt.github.io/muse-grokbot/
 > 発表者: [@morimoli_777](https://x.com/morimoli_777)
 >
 > ※公開時は `published: true` に変更してください。
