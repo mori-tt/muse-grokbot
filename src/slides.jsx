@@ -647,7 +647,7 @@ export const slides = [
           </Card>
           <Card accent="grok" title="雑務も丸投げ" icon="🛠️">
             「db更新、commit/pushしておいて」と開発の後片付けを依頼。
-            Bot専用メールアドレスの発行や、ハッカソン・イベント特典の手続き代行も。
+            Bot専用メールアドレスの発行も任せている。
           </Card>
         </div>
         <div className="mt-8 rounded-2xl border border-grok/40 bg-grok/5 p-5 text-left">
