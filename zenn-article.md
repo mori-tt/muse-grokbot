@@ -6,11 +6,11 @@ topics: ["AI", "AIエージェント", "Muse", "Grok", "生産性"]
 published: false
 ---
 
-> この記事は 2026/11/19 のLT勉強会で発表したスライド資料の記事版です。
+> この記事は 2026/11/19 のLT勉強会での発表資料の記事版です。
 > スライド版: https://mori-tt.github.io/muse-grokbot/
 > 発表者: [@morimoli_777](https://x.com/morimoli_777)
->
-> ※公開時は `published: true` に変更してください。
+
+<!-- 公開時は published: true に変更してください -->
 
 # はじめに
 
@@ -46,7 +46,7 @@ flowchart TD
 | 中核モデル | Muse Spark(プロンプトインジェクション耐性はSOTA級と自称) | Grok |
 | 単位 | メインMuse+サイドチャットで並列化 | 役割ごとのBot複数体 |
 | エコシステムの強み | WhatsApp・音声 / Instagram・Facebook / Link決済 | X / Slack・Teams・会議 / GitHub系 |
-| 主な接点 | iOS・Android・Web・Mac / WhatsApp / 音声 | macOS・iOS / Slack・Teams / 会議 |
+| 主な接点 | iOS・Android・Web・Mac / WhatsApp / 音声 | デスクトップ・モバイル / Slack・Teams・X / 会議 |
 | 実行環境 | 専用Secure VM(隔離Linux+本物のChromium) | Bot専用クラウドPC(転送・保存とも暗号化) |
 | 自動化 | スケジュール+イベント駆動、Spaceアプリの定期更新 | ルーティン・webhook・常駐Pages |
 | 安全の仕組み | Sentinel+認証情報の代替化+使い捨てカード | Auto Review / 権限継承 / Enterprise DLP |
@@ -70,7 +70,7 @@ flowchart TD
 
 ## Grok Bot = xAI × Cursor
 
-- 開発元は xAI(SpaceX Super Intelligence LLC) — **Xの投稿監視・収集が得意**
+- 開発元は xAI(SpaceX Super Intelligence LLC) — **Xの投稿監視・収集が得意**。**X上でもBotとチャットできる**(公式docs「desktop, mobile, in Slack, or on X」)
 - 実行基盤は **Cursor製**(ダウンロード元が `api2.cursor.sh`、MCP+skillsプラグイン対応)
 - だから GitHub・webhook・git操作など **開発者ワークフローにも強い**
 
@@ -156,7 +156,7 @@ Museは操作を「提案」するだけ。**コネクタ操作と全ネット�
 - PI検知はモデル学習+アンサンブル分類器の多層防御
 - ブラウザはDOMではなく**アクセシビリティツリー**経由。JS実行不可、DevTools無効
 - 使い捨てカードは**加盟店・金額・期限に紐付け**て発行。チェックアウト検知で毎回承認
-- 年内に「**Confidential VM**」(Meta社もアクセスできない暗号化モード)を提供予定と公表
+- 「**Confidential VM**」(Meta社もアクセスできない暗号化モード)を2026年内提供予定と公表(ブログ時点)
 
 # Grok Bot の中身を深掘り
 
@@ -244,7 +244,7 @@ Botと一緒に設計して作った、ルーティン+Pagesの複合監視シ�
 
 **常駐ルーティン(自動実行)**
 
-- **寄り前チェック**: 平日8:15〜。夜間の米株・ドル円・金利・日経先物+監視アカ投稿から注目水準を3行で届ける
+- **寄り前チェック**: 平日8:15〜。夜間の米株・ドル円・金利・日経先物+監視アカウントの投稿から注目水準を3行で届ける
 - **急変アラート**: 取引時間中1時間毎。急騰急落・日銀・介入系を検知した時だけ通知
 - **週間カレンダー**: 日曜夜。翌週の指標・会合・決算と事前の見方
 
@@ -297,7 +297,7 @@ flowchart LR
 - **会食・待ち合わせ**も場所・時間・相手を整理して通知
 - 入館に必要なゲストID/QRの有無を前日に確認
 - **予定が重なったら「どちらを優先しますか?」と聞きに来る**
-- Supabaseプロジェクトの「5日後に永久凍結」通知を拾って期限を逆算して警告
+- クラウドDBの「プロジェクト凍結予告」通知を拾って期限を逆算して警告
 
 驚きだったのは、Museが自分の手を超えない線引きも正直に言う点です(「Macは未接続なのでフォルダは触れません」と明言していた)。
 

@@ -148,7 +148,7 @@ export const slides = [
               xAI製。<b className="text-slate-200">役割ごとにBotを何体も作り</b>、
               ルーティンやwebhookで動き続ける仕組みを組める。
             </p>
-            <p className="mt-3 text-xs text-slate-500">x.ai/bot / macOS・iOS・Slack・Teams</p>
+            <p className="mt-3 text-xs text-slate-500">x.ai/bot / デスクトップ・モバイル / Slack・Teams・X</p>
           </Card>
         </div>
         <div className="mt-8 rounded-2xl border border-line bg-panel/80 p-5 text-center text-sm text-slate-400">
@@ -305,7 +305,7 @@ export const slides = [
         <div className="mt-6 rounded-2xl border border-line bg-panel/80 p-5 text-left text-sm text-slate-400">
           <b className="text-slate-200">さらに:</b> 隔離はsystemd-nspawn、PI検知はモデル学習+アンサンブル分類器の多層防御、
           ブラウザはDOMではなくアクセシビリティツリー経由でJS実行不可。
-          年内に「<b className="text-slate-200">Confidential VM</b>」(Meta社も見られない暗号化モード)を提供予定と公表。
+          「<b className="text-slate-200">Confidential VM</b>」(Meta社も見られない暗号化モード)を2026年内提供予定と公表(ブログ時点)。
         </div>
       </div>
     ),
@@ -371,7 +371,7 @@ export const slides = [
           </Card>
         </div>
         <div className="mt-8 rounded-2xl border border-line bg-panel/80 p-5 text-left text-sm text-slate-400">
-          <b className="text-slate-200">裏側:</b> 認証はCursor SSO/プライバシーモードと共通。
+          <b className="text-slate-200">裏側:</b> クライアント内部の挙動から、認証はCursor SSO/プライバシーモードと共通と見られる。
           共有スペースでは各人の権限を尊重し、公開チャンネルに出して良い情報か確認する
           (公式例: 代理店向け資料から機密財務スライドを除外して提案)。
         </div>
@@ -476,7 +476,7 @@ export const slides = [
                 ['中核モデル', 'Muse Spark(PI耐性SOTA級と自称)', 'Grok'],
                 ['単位', 'メインMuse+サイドチャットで並列化', '役割ごとのBot 複数体'],
                 ['エコシステムの強み', 'WhatsApp・音声 / Instagram・Facebook / Link決済', 'X / Slack・Teams・会議 / GitHub系'],
-                ['主な接点', 'iOS・Android・Web・Mac / WhatsApp / 音声', 'macOS・iOS / Slack・Teams / 会議'],
+                ['主な接点', 'iOS・Android・Web・Mac / WhatsApp / 音声', 'デスクトップ・モバイル / Slack・Teams・X / 会議'],
                 ['実行環境', '専用Secure VM(隔離Linux+本物のChromium)', 'Bot専用クラウドPC(暗号化)'],
                 ['自動化', 'スケジュール+イベント駆動、Spaceアプリの定期更新', 'ルーティン・webhook・常駐Pages'],
                 ['安全の仕組み', 'Sentinel+認証情報の代替化+使い捨てカード', 'Auto Review / 権限継承 / Enterprise DLP'],
@@ -593,7 +593,7 @@ export const slides = [
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           <Card accent="grok" title="常駐ルーティン(自動実行)" icon="⏰">
             <ul className="space-y-2">
-              <li>・<b className="text-slate-200">寄り前チェック</b>: 平日8:15〜。夜間の米株・ドル円・金利・日経先物+監視アカ投稿から注目水準を3行で届ける</li>
+              <li>・<b className="text-slate-200">寄り前チェック</b>: 平日8:15〜。夜間の米株・ドル円・金利・日経先物+監視アカウントの投稿から注目水準を3行で届ける</li>
               <li>・<b className="text-slate-200">急変アラート</b>: 取引時間中1時間毎。急騰急落・日銀・介入系を検知した時だけ通知</li>
               <li>・<b className="text-slate-200">週間カレンダー</b>: 日曜夜。翌週の指標・会合・決算と事前の見方</li>
             </ul>
@@ -609,7 +609,7 @@ export const slides = [
           <div className="rounded-2xl border border-line bg-panel/80 p-5 text-left text-sm">
             <p className="font-semibold text-slate-100">監視対象</p>
             <p className="mt-2 text-slate-400">
-              Xの金融アカウント3つ(@t_ryoma1985 / @nicosokufx / @goto_finance)+
+              Xの金融系アカウント3つ+
               日経先物・ドル円・米3指数・VIX・米10年金利 — <b className="text-slate-200">Xアクセスの強さをフル活用</b>
             </p>
           </div>
@@ -674,7 +674,7 @@ export const slides = [
         />
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {[
-            ['ダッシュボード系', ['補助金・助成金ダッシュボード', 'JAL・ANA・新幹線 セールダッシュボード', 'コーディングエージェント利用枠ダッシュボード']],
+            ['ダッシュボード系', ['補助金・助成金ダッシュボード', '旅行セール系ダッシュボード', 'コーディングエージェント利用枠ダッシュボード']],
             ['分析ツール系', ['GA・GSC 統合分析アプリ', 'Webサイト診断アプリ']],
             ['業務書類・台帳系', ['投稿台帳アプリ', '補助金・助成金リスト', '助成金 申請手順書', 'チェックリスト×3(GitHub/Gmail/Yahooメール)']],
           ].map(([t, items]) => (
@@ -690,8 +690,8 @@ export const slides = [
           <div className="rounded-2xl border border-line bg-panel/80 p-5 text-left text-sm">
             <p className="font-semibold text-slate-100">作ったアプリを定期実行</p>
             <p className="mt-2 text-slate-400">
-              「セールダッシュボード」と「補助金ダッシュボード」は<b className="text-slate-200">毎朝自動更新</b>、
-              補助金リスト系は<b className="text-slate-200">週次更新</b>でスケジュール済み。
+              「旅行セール系」と「補助金・助成金」のダッシュボードは<b className="text-slate-200">毎朝自動更新</b>、
+              リスト系は<b className="text-slate-200">週次更新</b>でスケジュール済み。
             </p>
           </div>
           <div className="rounded-2xl border border-line bg-panel/80 p-5 text-left text-sm">
@@ -728,7 +728,7 @@ export const slides = [
           </Card>
           <Card accent="muse" title="障害・期限の監視" icon="🚨">
             <ul className="space-y-1.5">
-              <li>・Supabaseプロジェクトの「5日後に永久凍結」通知を拾って期限を逆算して警告</li>
+              <li>・クラウドDBの「プロジェクト凍結予告」通知を拾って期限を逆算して警告</li>
               <li>・ウェビナー登録状況の確認</li>
               <li>・操作はせず<b className="text-slate-200">判断材料だけ届ける</b>のが正確</li>
             </ul>
