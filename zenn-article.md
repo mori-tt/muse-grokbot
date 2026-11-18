@@ -25,21 +25,19 @@ published: false
 
 # まず結論: 「答える」AIから「やってくれる」AIへ
 
-```
-    あなた
-      │ 目的を伝える
-      ▼
-┌───────────┐        ┌───────────┐
-│   Muse    │        │ Grok Bot  │
-│ Metaの秘書 │        │ xAIの軍団 │
-└─────┬─────┘        └─────┬─────┘
-      ▼                    ▼
- 専用Secure VM      Bot専用クラウドPC
- (Chromium付き)     (Slack/Teams常駐)
-      │                    │
-      ▼                    ▼
- Spaceアプリ量産    ルーティン×16体で
- +先回り秘書       監視・分析が24/7動く
+```mermaid
+flowchart TD
+    You["あなた(目的を伝える)"]
+    You --> M["Muse<br>Metaの秘書"]
+    You --> G["Grok Bot<br>xAIの軍団"]
+    M --> MV["専用 Secure VM<br>本物のChromium付き"]
+    G --> GC["Bot専用クラウドPC<br>Slack/Teams常駐"]
+    MV --> MO["Spaceアプリ量産<br>+ 先回り秘書"]
+    GC --> GO["ルーティン×16体で<br>監視・分析が24/7動く"]
+    style M fill:#7c3aed,stroke:#a78bfa,color:#fff
+    style MO fill:#4c1d95,stroke:#a78bfa,color:#eee
+    style G fill:#0891b2,stroke:#34d399,color:#fff
+    style GO fill:#155e75,stroke:#34d399,color:#eee
 ```
 
 | | Muse | Grok Bot |
@@ -114,17 +112,24 @@ Goalsタブで長期目標と計画を追跡。記憶ファイルは自分で閲
 
 公式セキュリティブログの実装詳細が本当に攻めています。設計思想は「**エージェントは攻撃されている前提**」。
 
-```
-┌────────────── Secure VM(あなた専用の隔離Linux) ──────────────┐
-│                                                              │
-│   あなた ──▶ Muse ────「操作の提案」───▶ Sentinel ──┬─▶ allow │
-│             │                          (別エージェント)├─▶ deny  │
-│             │提案のみ                        唯一の許可権限├─▶ ask→あなた
-│             │                                            │       │
-│             └── surrogateトークン ──▶ 境界で本物に差替 ──▶ 外部  │
-│                                                              │
-│   runtime cell(systemd-nspawn) │ hatch-authd │ privsep       │
-└──────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph VM["Secure VM(1人1台の隔離Linux)"]
+        direction TB
+        M["Muse<br>操作は「提案」するだけ"]
+        S["Sentinel<br>別エージェント・唯一の許可権限"]
+        A["hatch-authd<br>認証情報を隔離保管"]
+        M -->|"操作の提案"| S
+        A -.->|"ネットワーク境界で本物に差替"| S
+    end
+    U["あなた"] -->|"目的を伝える"| M
+    S -->|"allow"| EXT["外部サービス"]
+    S -->|"ask"| U
+    S -->|"deny"| X(("✕"))
+    M -.->|"見えるのはsurrogateトークンのみ"| S
+    style M fill:#4c1d95,stroke:#a78bfa,color:#eee
+    style S fill:#7c3aed,stroke:#a78bfa,color:#fff
+    style A fill:#1f2937,stroke:#6b7280,color:#eee
 ```
 
 ### Sentinel — 唯一の許可権限
@@ -173,11 +178,17 @@ Botをチームで共有。Slack/Teams常駐のほか、**Meet/Zoom/Teamsの会�
 
 ## 動作モデル: ルーティンとPages
 
-```
- スケジュール ─┐
-              ├─▶ Bot起動 ──▶ Pages更新 / 通知 / 下調べ ──▶ あなた
- webhook ─────┘      │
-                     └─▶ 必要なら他Botへ引き継ぎ(24/7並行稼働)
+```mermaid
+flowchart LR
+    SCH["スケジュール"] --> B["Bot起動"]
+    WH["webhook"] --> B
+    B --> P["Pages更新"]
+    B --> N["通知・下調べ"]
+    B -->|"必要なら"| OB["他Botへ引き継ぎ<br>24/7並行稼働"]
+    P --> U["あなた"]
+    N --> U
+    style B fill:#0891b2,stroke:#34d399,color:#fff
+    style P fill:#155e75,stroke:#34d399,color:#eee
 ```
 
 - **Routines**: 「毎朝7時にダッシュボード更新」のような定期実行。webhookトリガーでも起動可能
@@ -198,13 +209,15 @@ Botをチームで共有。Slack/Teams常駐のほか、**Meet/Zoom/Teamsの会�
 - ルーティン自動実行: **34回**
 - 稼働中のwebhook連携: **1件**
 
-```
-                    ┌─ 分析・解説Bot群(9体)
-                    │   経済×4時間軸 / 政治×2 / AI / 地政学 / 経済学
- 自分のGrok Bot 16体 ├─ 市場監視Bot群(2体)
-                    │   トレード参謀 / 相場ダッシュボード
-                    └─ 実用・連携Bot群(5体)
-                        webhook / メール設定 / ハッカソン・イベント / 通知等
+```mermaid
+flowchart LR
+    ME["自分のGrok Bot<br>16体"] --> A["分析・解説Bot群 9体<br>経済×4時間軸 / 政治×2<br>AI / 地政学 / 経済学"]
+    ME --> B["市場監視Bot群 2体<br>トレード参謀<br>相場ダッシュボード"]
+    ME --> C["実用・連携Bot群 5体<br>webhook / メール設定<br>ハッカソン・イベント / 通知等"]
+    style ME fill:#0891b2,stroke:#34d399,color:#fff
+    style A fill:#155e75,stroke:#34d399,color:#eee
+    style B fill:#155e75,stroke:#34d399,color:#eee
+    style C fill:#155e75,stroke:#34d399,color:#eee
 ```
 
 ※各Botには「日本語話者(Asia/Tokyo)、常に日本語で簡潔に」と共通ルールを持たせています。
@@ -213,17 +226,14 @@ Botをチームで共有。Slack/Teams常駐のほか、**Meet/Zoom/Teamsの会�
 
 経済・短期 / 経済・中期 / 経済・長期 / 経済・過去5年時系列 / マクロ・ミクロ経済学 / 政治分析 / 国際政治分析 / AI周りの重要ニュース / X通知 ——と、**同じニュースを複数の時間軸・領域で解説させる**使い方をしています。
 
-```
- 気になるニュース
-      │
-      ▼ 投げる
- 3段解説(ざっくり→生活影響→専門家の見方)
-      │
-      ▼ 「もっと深掘りして」(最多パターン)
- 問いが深まる
-      │
-      ▼ 「ダッシュボード化して」
- 常駐Page化 ──▶ 毎朝7時自動更新+手動ボタン
+```mermaid
+flowchart TD
+    N["気になるニュース"] -->|"投げる"| D["3段解説<br>ざっくり → 生活への影響 → 専門家の見方"]
+    D -->|"「もっと深掘りして」<br>(最多パターン)"| Q["問いが深まる"]
+    Q -->|"「ダッシュボード化して」"| PG["常駐Page化"]
+    PG --> R["毎朝7時自動更新<br>+手動更新ボタン"]
+    style PG fill:#0891b2,stroke:#34d399,color:#fff
+    style R fill:#155e75,stroke:#34d399,color:#eee
 ```
 
 こだわりの指示として、経済ニュースは**クルーグマン vs マンキュー**の対比で解説させたり、「数値は実際に取れたものだけ、出典と日本時間の時点を明記」とルール化したりしています。
@@ -263,23 +273,21 @@ Cursor基盤だからこそできる、開発者向けの使い方:
 
 サイドチャットを複数立ち上げて並行制作。ライブラリに**11個のスペース**がありました:
 
-```
- サイドチャットA ─▶ ダッシュボード系 ─┐
-                    補助金・助成金 /   │
-                    JAL・ANA・新幹線   │
-                    セール /           │
-                    エージェント利用枠 │
-                                     ├─▶ 定期実行で動き続ける
- サイドチャットB ─▶ 分析ツール系      │     (毎朝or週次で自動更新)
-                    GA・GSC統合分析 / │
-                    Webサイト診断     │
-                                     │
- サイドチャットC ─▶ 業務書類・台帳系 ─┘
-                    投稿台帳 / 補助金リスト /
-                    申請手順書 / チェックリスト×3
+```mermaid
+flowchart LR
+    CA["サイドチャットA"] --> DA["ダッシュボード系<br>補助金・助成金 / セール / 利用枠"]
+    CB["サイドチャットB"] --> DB["分析ツール系<br>GA・GSC統合分析 / Webサイト診断"]
+    CC["サイドチャットC"] --> DC["業務書類・台帳系<br>投稿台帳 / 補助金リスト / 手順書 / チェックリスト×3"]
+    DA --> RUN["定期実行で動き続ける<br>(毎朝 or 週次で自動更新)"]
+    DB --> RUN
+    DC --> RUN
+    style CA fill:#4c1d95,stroke:#a78bfa,color:#eee
+    style CB fill:#4c1d95,stroke:#a78bfa,color:#eee
+    style CC fill:#4c1d95,stroke:#a78bfa,color:#eee
+    style RUN fill:#7c3aed,stroke:#a78bfa,color:#fff
 ```
 
-そして作るだけではなく、PDF出力実装、複数サイト登録・比較機能追加、バグチェック、HTTPS/リダイレクト監査まで**Museにそのまま改修させています**。
+そして作るだけではありません。PDF出力の実装、複数サイト登録・比較機能の追加、バグチェック、HTTPS/リダイレクト監査まで**Museにそのまま改修させています**。
 
 ## メールを読み、先回りして知らせてくる
 

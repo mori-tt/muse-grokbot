@@ -141,7 +141,7 @@ export const slides = [
               Meta製のパーソナルエージェント。<b className="text-slate-200">サイドチャットを何本も立ち上げて
               並列で仕事を進められる</b>ので、実質「1人」ではなく量産も可能。
             </p>
-            <p className="mt-3 text-xs text-slate-500">muse.ai / Mac・モバイル・WhatsApp</p>
+            <p className="mt-3 text-xs text-slate-500">muse.ai / iOS・Android・Web・Mac / WhatsApp・音声</p>
           </Card>
           <Card accent="grok" title="Grok Bot — 分身を量産できる同僚">
             <p>
