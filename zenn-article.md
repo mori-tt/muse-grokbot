@@ -189,6 +189,17 @@ Museは操作を「提案」するだけ。**コネクタ操作と全ネット�
 - 「**Confidential VM**」(Meta社もアクセスできない暗号化モード)を年内提供予定。すでに少人数の信頼テスターが利用中で、設計とソースコードを外部監査人に開示し始めており、ローンチ後は誰でも検査可能な継続監査にすると公表
 - データ方針: 会話やVMのデータはMetaの広告システムと共有しない。学習にはPII除去済みのtrajectoryを使い、設定スイッチでopt-out可能
 
+## データ方針(プライバシーポリシー 2026/11/16施行)
+
+Muse専用のプライバシーポリシーがつい先日更新されていて、ここも読み応えがあります:
+
+- **会話・VM内データはMetaの広告システムと共有しない**——同じアカウントセンターに他のMeta製品があっても、Museでのやり取りやVMデータはFacebook/Instagram/Threads/WhatsAppと共有されないと明記
+- **学習利用はデフォルトON**で、設定→データコントロールのトグルでいつでも切替可。**オフにすると過去のやり取りにも遡って適用**され、学習利用の場合も名前・メール・電話番号等の個人情報は学習前に除去+アカウントとの関連付けを解除
+- **「Muse Confidential VM」がポリシー文書にも明記**: 「Metaに対してもユーザーの情報をプライベートに保つよう設計された環境」を将来選択可能にすると公式ポリシーが記述(セキュリティブログの「年内提供予定」説と一致、まだ未提供)
+- **デバイス連携**: Muse for Macのほか、**「Muse Charm」というデバイス**(動作にMuse本体が必要)と、AIグラス等のMetaウェアラブル経由でもMuseにアクセスできる(MPT補足条項が適用)
+- コネクタは**読み取り専用に制限できる**ものが多く、カレンダー変更等で能動的にMuseへ情報を送れるコネクタは「リンク前にMetaが特定したもの」だけ。メールも「指示しない限り受信箱全体はダウンロードしない」設計
+- データのリセット・削除・「忘れる」スキルが揃っていて、削除後も残る学習済み記憶は「忘れて」で対処可能
+
 ## バグバウンティ: 金額だけでなく実績が出ている
 
 2026/11/2公開の公式投稿([Securing Muse](https://muse.ai/blog/securing-muse)、David Singleton)によると:
@@ -293,6 +304,9 @@ flowchart LR
 - **SSO/IdP統合がガチ**: SAML 2.0(Okta・Entra・Google Workspace・OneLogin)+SCIM 2.0の自動プロビジョニング/デプロビジョニング。Bot PCは非管理Linux端末として扱われ、Oktaでは「Other Desktop」用の認証ポリシールール、EntraではLinux向け条件付きアクセスポリシーの作り方まで公式に記述。Okta FastPassさえTeam Setup Scriptで導入できる
 - **Team Setup Scriptsの作りが本物**: Debianベースの各PCでsudoつき実行・30分タイムアウト・約日次の再実行・Check Scriptで冪等化・Team Secretsは環境変数としてのみ注入(マニフェストは平文のため秘密値禁止)。公式docsには**Tailscale exit nodeで社内プライベートネットワークに繋ぐ手順**が丸ごと載っている
 - チーム内にも**「Browse Team Bots」という社内マーケットプレイス**があり、「Popular」「Team approved」(管理者承認済み)のバッジつきで一覧できる。組織共有のBotは席を持たないSlackメンバーのメンションにも(制限つきで)応答する
+- 課金の面白い挙動: Team Botのチャットで他人が使った分は**回答した人の枠**を消費するが、Slackでアカウント未連携の人への返信は「チームのusage」を消費。**オーナーの利用上限が尽きると「This Bot's owner has reached their usage limit」と表示されてBotが止まる**
+- 課金体系の変化: 新規は**「The X Subscription」**(CursorとGrokを1ワークスペース・1請求に統合)がデフォルト。週次の使用プールはGrok・Grok Bot・Cursorで共有され、PlusにはGrok Botが含まれない(Premium以上)。従来のSuperGrok/X Premium+リンクは既存ユーザー向けに残る
+- 運用面の裏話: 障害確認は status.cursor.com の「Grok Bot」行。PC内で`rm -rf`してもチャットは別保存なので消えないが、`node_modules`やvenvはPC更新/Recover/Resetで消える仕様
 
 ## Botマーケットプレイス
 
@@ -455,6 +469,7 @@ flowchart LR
 - [How We Built Safety Into Muse](https://muse.ai/blog/security-and-safety-for-ai-agents-our-approach-with-muse) — Sentinel/VM/eBPF実装(Tarek Sheasha, 2026/9/8)
 - [Securing Muse: More Than $1 Million in Bug Bounties Paid Out](https://muse.ai/blog/securing-muse) — バウンティ実績(David Singleton, 2026/11/2)
 - [Muse Security & Privacy](https://muse.ai/security-and-privacy) — Secure VM・Sentinel・Secure Credentials Storeの公式説明
+- [Museプライバシーポリシー](https://muse.ai/privacy) — 2026/11/16施行。広告非共有・学習opt-out・Confidential VM構想・Muse Charm/AIグラス連携
 - [Metaヘルプセンター「Museでの支払いのしくみ」](https://www.meta.com/help/superintelligence/1436362127544482/) — 購入フロー・承認の仕組み
 - [Stripe newsroom](https://stripe.com/newsroom/news/stripe-helps-meta-muse-shop-with-link) — Link agent wallet発表(2026/9/8)。Link加盟店100万社超・ユーザー3億人超・ワンタイム仮想カードは事前承認額に限定
 - [Simon Willison「The lethal trifecta」](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/) — Muse公式ブログも引用するPI前提条件の原典(2025/6/16)

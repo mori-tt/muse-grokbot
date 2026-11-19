@@ -121,14 +121,20 @@ export default function App() {
           </div>
         </div>
       ) : (
-        <main key={index} className={`relative z-10 flex h-full items-center ${dir > 0 ? 'anim-fwd' : 'anim-bck'}`}>
-          <div className="mx-auto w-full max-w-5xl px-6 pb-24 md:px-10">{slide.content}</div>
+        <main key={index} className="relative z-10 h-full overflow-y-auto">
+          <div
+            className={`mx-auto flex min-h-full w-full max-w-5xl items-center px-4 pb-28 pt-10 md:px-10 ${
+              dir > 0 ? 'anim-fwd' : 'anim-bck'
+            }`}
+          >
+            <div className="w-full">{slide.content}</div>
+          </div>
         </main>
       )}
 
       {/* bottom chrome */}
-      <footer className="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between px-5 py-4 text-xs text-slate-500">
-        <span className="w-40 truncate text-left">{slide.section}</span>
+      <footer className="absolute inset-x-0 bottom-0 z-20 flex items-center justify-center px-5 py-4 text-xs text-slate-500 sm:justify-between">
+        <span className="hidden w-40 truncate text-left sm:block">{slide.section}</span>
         <div className="flex items-center gap-3">
           <button
             onClick={prev}
@@ -157,7 +163,7 @@ export default function App() {
             ⊞
           </button>
         </div>
-        <span className="w-40 text-right">Muse × Grok Bot</span>
+        <span className="hidden w-40 text-right sm:block">Muse × Grok Bot</span>
       </footer>
     </div>
   )

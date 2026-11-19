@@ -31,10 +31,10 @@ function SlideHead({ accent, no, kicker, title, sub }) {
   return (
     <header className="stagger">
       <Kicker accent={accent} no={no}>{kicker}</Kicker>
-      <h2 className="mt-4 text-4xl font-bold tracking-tight text-slate-50 md:text-5xl">
+      <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl md:text-5xl">
         {title}
       </h2>
-      {sub && <p className="mt-4 text-lg text-slate-400">{sub}</p>}
+      {sub && <p className="mt-4 text-base text-slate-400 sm:text-lg">{sub}</p>}
     </header>
   )
 }
@@ -90,7 +90,7 @@ export const slides = [
     content: (
       <div className="stagger flex flex-col items-center text-center">
         <p className="kicker text-slate-500">AI Agent Playbook</p>
-        <h1 className="mt-6 text-5xl font-black leading-tight tracking-tight text-slate-50 md:text-7xl">
+        <h1 className="mt-6 text-4xl font-black leading-tight tracking-tight text-slate-50 sm:text-5xl md:text-7xl">
           <span className="bg-gradient-to-r from-muse-deep via-muse to-muse bg-clip-text text-transparent">
             Muse
           </span>
@@ -465,13 +465,13 @@ export const slides = [
           kicker="Comparison"
           title="似ているようで得意領域が違う"
         />
-        <div className="mt-8 overflow-hidden rounded-2xl border border-line">
-          <table className="w-full text-left text-sm">
+        <div className="mt-8 overflow-x-auto rounded-2xl border border-line">
+          <table className="w-full min-w-[38rem] text-left text-sm">
             <thead>
               <tr className="bg-panel">
-                <th className="px-5 py-4 font-semibold text-slate-400"></th>
-                <th className="px-5 py-4 font-semibold text-muse">Muse</th>
-                <th className="px-5 py-4 font-semibold text-grok">Grok Bot</th>
+                <th className="px-3 py-4 font-semibold text-slate-400 sm:px-5"></th>
+                <th className="px-3 py-4 font-semibold text-muse sm:px-5">Muse</th>
+                <th className="px-3 py-4 font-semibold text-grok sm:px-5">Grok Bot</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-line">
@@ -487,9 +487,9 @@ export const slides = [
                 ['料金', '無料(週制限)+Power $20 / Maximum $100(現状US・CA・18+)', 'Premium $30 / Super $100(3.5x) / Ultra $200(12x)+従量'],
               ].map(([k, m, g]) => (
                 <tr key={k} className="bg-panel/50">
-                  <td className="px-5 py-3 font-medium text-slate-400">{k}</td>
-                  <td className="px-5 py-3 text-slate-200">{m}</td>
-                  <td className="px-5 py-3 text-slate-200">{g}</td>
+                  <td className="px-3 py-3 font-medium text-slate-400 sm:px-5">{k}</td>
+                  <td className="px-3 py-3 text-slate-200 sm:px-5">{m}</td>
+                  <td className="px-3 py-3 text-slate-200 sm:px-5">{g}</td>
                 </tr>
               ))}
             </tbody>
