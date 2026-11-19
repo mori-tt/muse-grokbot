@@ -37,6 +37,8 @@ npx gh-pages -d dist
 
 ## 出典
 
-製品仕様はすべて一次情報で検証済み(詳細はスライド#19「出典・参考リンク」):
-muse.ai / muse.ai/blog(設計・セキュリティ) / meta.com/help / stripe.com/newsroom /
-x.ai/bot / x.ai/news/grok-bot-1-0 / docs.x.ai
+製品仕様はすべて一次情報で検証済み(詳細はスライド「出典・参考リンク」):
+muse.ai / muse.ai/blog(設計・セキュリティ・バウンティ実績) / muse.ai/security-and-privacy / muse.ai/business /
+meta.com/help(権限・購入・Museサブスク料金) / about.fb.com/news(Muse Small Business発表) / stripe.com/newsroom /
+x.ai/bot / x.ai/news/grok-bot-1-0 / docs.x.ai(grok-bot全ページ: meetings・teams・routines・files・computer・approvals・team-bots・vault・bots・chat・mobile・security等) /
+x.ai/bot/marketplace / x.ai/changelog/bot / trust.cursor.com

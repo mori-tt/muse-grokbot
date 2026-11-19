@@ -176,15 +176,15 @@ export const slides = [
               <li>・<b className="text-slate-200">WhatsApp+音声モード</b>でも直接話せる(公式)</li>
               <li>・<b className="text-slate-200">Instagram / Facebook</b>コネクタでメタ系アプリと連携</li>
               <li>・決済はLink(Stripe製)のワンタイムカード — カード番号を見せない</li>
-              <li>・公開バグバウンティ<b className="text-slate-200">最大$300K</b>(PI攻撃だけで最大$130K)</li>
+              <li>・公開バグバウンティ<b className="text-slate-200">最大$300K</b>(PI攻撃だけで最大$130K)。累計約$1.2M支払い済み(2026/11/2公表)</li>
             </ul>
           </Card>
           <Card accent="grok" title="Grok Bot = xAI × Cursor">
             <ul className="space-y-2">
-              <li>・開発元はxAI(SpaceX Super Intelligence LLC) — <b className="text-slate-200">Xの投稿監視・収集が得意</b></li>
-              <li>・実行基盤は<b className="text-slate-200">Cursor製</b>(DL元がapi2.cursor.sh、MCP+skillsプラグイン)</li>
-              <li>・だからGitHub・webhook・git操作など<b className="text-slate-200">開発者ワークフローにも強い</b></li>
-              <li>・自分もXの金融アカウント監視で実際に使っている</li>
+              <li>・開発元はxAI(SpaceX Super Intelligence LLC) — <b className="text-slate-200">公開Xの検索・閲覧は連携なしで標準搭載</b></li>
+              <li>・実行基盤は<b className="text-slate-200">Cursor製</b>(api2.cursor.sh / Cursorクラウド上で実行 / OAuthはCursorのconnector backend)</li>
+              <li>・公式FAQに「same Cursor SSO, auth, and privacy mode」と明記。管理はcursor.com/dashboard/bot</li>
+              <li>・だからGitHub・webhook・git・MCPサーバー追加など<b className="text-slate-200">開発者ワークフローにも強い</b></li>
             </ul>
           </Card>
         </div>
@@ -206,7 +206,7 @@ export const slides = [
           accent="muse" no="03"
           kicker="Muse Basics"
           title="Muse = ゴールを伝えるだけのAI"
-          sub="システムプロンプトの1行目は「Your purpose is to make your user's life better」。中核は専用モデル「Muse Spark」"
+          sub="システムプロンプトの1行目は「Your purpose is to make your user's life better」。中核は専用モデル「Muse Spark 1.3」"
         />
         <div className="mt-10 flex flex-wrap gap-3">
           {MUSE_TASKS.map((t) => (
@@ -305,7 +305,8 @@ export const slides = [
         <div className="mt-6 rounded-2xl border border-line bg-panel/80 p-5 text-left text-sm text-slate-400">
           <b className="text-slate-200">さらに:</b> 隔離はsystemd-nspawn、PI検知はモデル学習+アンサンブル分類器の多層防御、
           ブラウザはDOMではなくアクセシビリティツリー経由でJS実行不可。
-          「<b className="text-slate-200">Confidential VM</b>」(Meta社も見られない暗号化モード)を2026年内提供予定と公表(ブログ時点)。
+          「<b className="text-slate-200">Confidential VM</b>」(Meta社も見られない暗号化モード)を年内提供予定と公表。
+          バウンティは累計<b className="text-slate-200">約$1.2M支払い済み</b>(630件超報告・64件有効、2026/11/2公式発表)。
         </div>
       </div>
     ),
@@ -371,9 +372,9 @@ export const slides = [
           </Card>
         </div>
         <div className="mt-8 rounded-2xl border border-line bg-panel/80 p-5 text-left text-sm text-slate-400">
-          <b className="text-slate-200">裏側:</b> クライアント内部の挙動から、認証はCursor SSO/プライバシーモードと共通と見られる。
+          <b className="text-slate-200">裏側:</b> 公式FAQに「same Cursor SSO, auth, and privacy mode you already trust」と明記。
           共有スペースでは各人の権限を尊重し、公開チャンネルに出して良い情報か確認する
-          (公式例: 代理店向け資料から機密財務スライドを除外して提案)。
+          (公式例: 代理店向け資料のスライド6の機密財務情報を外して送るか提案)。
         </div>
       </div>
     ),
@@ -395,8 +396,8 @@ export const slides = [
             各メンバーの権限と利用枠で動く。
           </Card>
           <Card accent="grok" title="自分のコンピュータ" icon="🖥️">
-            Bot専用のクラウドPC(転送・保存とも暗号化)。一度サインインすれば
-            操作しづらい社内ツールも自分で使いこなす。
+            ユーザー専用の常設クラウドPC(Firecracker microVM、自分の全Botが共有)。
+            一度サインインすれば操作しづらい社内ツールも自分で使いこなす。
           </Card>
           <Card accent="grok" title="Routines(ルーティン)" icon="⏰">
             「毎朝7時にダッシュボード更新」のような定期実行。スケジュール駆動に加え
@@ -413,6 +414,9 @@ export const slides = [
             文脈から学び、自分の改善提案まで行う。
           </Card>
         </div>
+        <p className="mt-8 text-center text-sm text-slate-400">
+          さらに: Botが<b className="text-slate-200">電話をかける</b>(US・録音付)・<b className="text-slate-200">2〜6体のグループチャット</b>でBotが分担・<b className="text-slate-200">X Chat</b>からも話せる・Xで<b className="text-slate-200">@botタグ</b>るだけで仕事を依頼・ボイス/Siri・<b className="text-slate-200">動画生成</b>も
+        </p>
       </div>
     ),
   },
@@ -429,7 +433,7 @@ export const slides = [
           sub="x.ai/bot/marketplace — 公式+コミュニティ製のBotをワンクリック追加"
         />
         <div className="mt-10 flex flex-wrap gap-3">
-          {['Engineering', 'Sales', 'Marketing', 'Design', 'Personal', 'Recruiting', 'Product', 'Operations'].map((t) => (
+          {['Engineering', 'Sales', 'Marketing', 'Design', 'Personal', 'Recruiting & People', 'Product', 'Operations'].map((t) => (
             <Chip key={t} accent="grok">{t}</Chip>
           ))}
         </div>
@@ -473,14 +477,14 @@ export const slides = [
             <tbody className="divide-y divide-line">
               {[
                 ['開発元', 'Meta', 'xAI(基盤はCursor)'],
-                ['中核モデル', 'Muse Spark(PI耐性SOTA級と自称)', 'Grok'],
+                ['中核モデル', 'Muse Spark 1.3(PI耐性「close to SOTA」と公式評価)', 'Grok'],
                 ['単位', 'メインMuse+サイドチャットで並列化', '役割ごとのBot 複数体'],
                 ['エコシステムの強み', 'WhatsApp・音声 / Instagram・Facebook / Link決済', 'X / Slack・Teams・会議 / GitHub系'],
                 ['主な接点', 'iOS・Android・Web・Mac / WhatsApp / 音声', 'デスクトップ・モバイル / Slack・Teams・X / 会議'],
-                ['実行環境', '専用Secure VM(隔離Linux+本物のChromium)', 'Bot専用クラウドPC(暗号化)'],
+                ['実行環境', '専用Secure VM(隔離Linux+本物のChromium)', 'ユーザー専用常設PC(Firecracker microVM・全Bot共有)'],
                 ['自動化', 'スケジュール+イベント駆動、Spaceアプリの定期更新', 'ルーティン・webhook・常駐Pages'],
-                ['安全の仕組み', 'Sentinel+認証情報の代替化+使い捨てカード', 'Auto Review / 権限継承 / Enterprise DLP'],
-                ['料金', '価格未公表(アカウント制)', 'Premium $30 / Super $100 / Ultra $200+従量'],
+                ['安全の仕組み', 'Sentinel+認証情報の代替化+使い捨てカード', 'Auto Review(独立モデル)/Custom Rules/Vault/Enterprise DLP'],
+                ['料金', '無料(週制限)+Power $20 / Maximum $100(現状US・CA・18+)', 'Premium $30 / Super $100(3.5x) / Ultra $200(12x)+従量'],
               ].map(([k, m, g]) => (
                 <tr key={k} className="bg-panel/50">
                   <td className="px-5 py-3 font-medium text-slate-400">{k}</td>
@@ -647,7 +651,7 @@ export const slides = [
           </Card>
           <Card accent="grok" title="雑務も丸投げ" icon="🛠️">
             「db更新、commit/pushしておいて」と開発の後片付けを依頼。
-            Bot専用メールアドレスの発行も任せている。
+            Bot用メールアドレス(@mail.grokbot.com)の発行も任せている。
           </Card>
         </div>
         <div className="mt-8 rounded-2xl border border-grok/40 bg-grok/5 p-5 text-left">
@@ -799,21 +803,23 @@ export const slides = [
           <div className="rounded-2xl border border-muse/40 bg-muse/5 p-6 text-left">
             <p className="font-semibold text-muse">Muse(Meta)</p>
             <ul className="mt-3 space-y-2 text-sm text-slate-300">
-              <li>・muse.ai — 公式トップ</li>
+              <li>・muse.ai — 公式トップ(WhatsApp・音声モード明記)</li>
               <li>・muse.ai/blog/how-we-designed-muse — 設計思想(Mona Sarantakos, 2026/9/8)</li>
-              <li>・muse.ai/blog/security-and-safety-for-ai-agents-our-approach-with-muse — Sentinel/VM/eBPF実装(Tarek Sheasha)</li>
-              <li>・meta.com/help — 購入フロー・承認の仕組み</li>
-              <li>・stripe.com/newsroom — Link agent wallet発表(2026/9/8)</li>
+              <li>・muse.ai/blog/security-and-safety-… — Sentinel/VM/eBPF実装(Tarek Sheasha, 同日)</li>
+              <li>・muse.ai/blog/securing-muse — バウンティ累計$1.2M+支払い(David Singleton, 2026/11/2)</li>
+              <li>・muse.ai/security-and-privacy・/business / meta.com/help — 権限・購入・料金プラン</li>
+              <li>・stripe.com/newsroom・Meta Newsroom — Link agent wallet・Muse Small Business発表</li>
             </ul>
           </div>
           <div className="rounded-2xl border border-grok/40 bg-grok/5 p-6 text-left">
             <p className="font-semibold text-grok">Grok Bot(xAI)</p>
             <ul className="mt-3 space-y-2 text-sm text-slate-300">
-              <li>・x.ai/bot — 公式トップ・料金</li>
+              <li>・x.ai/bot — 公式トップ・料金・FAQ(Cursor SSO/Auto Review明記)</li>
               <li>・x.ai/news/grok-bot-1-0 — 1.0発表(2026/11/11)</li>
-              <li>・docs.x.ai/grok-bot/meetings — 会議参加の仕様</li>
-              <li>・docs.x.ai/grok-bot/microsoft-teams — Teams連携</li>
-              <li>・x.ai/changelog/bot — 機能更新履歴</li>
+              <li>・docs.x.ai/grok-bot — meetings / microsoft-teams / skills-routines-and-automations / files-and-results</li>
+              <li>・docs.x.ai/grok-bot — computer-and-apps / approvals-security-and-privacy / teams-and-enterprises</li>
+              <li>・docs.x.ai/grok-bot — vault / team-bots / bots / chat-and-collaboration / mobile / security / security-faq</li>
+              <li>・x.ai/bot/marketplace / x.ai/changelog/bot / trust.cursor.com — Bot一覧・履歴・認証</li>
             </ul>
           </div>
         </div>
